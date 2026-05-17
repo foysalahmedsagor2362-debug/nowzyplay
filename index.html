@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Movie Portal</title>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+
+        <!-- LEFT -->
+        <div class="nav-left">
+            <div class="logo">
+                <img src="./Assets/logo.png">
+            </div>
+            <span onclick="navigate('home')">Home</span>
+            <span onclick="navigate('movies')">Movies</span>
+            <span onclick="navigate('series')">Series</span>
+            <span onclick="navigate('serials')">Serials</span>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="nav-right">
+
+            <!-- ✅ SEARCH INPUT (ONLY INPUT HERE) -->
+            <input type="text" id="searchInput" placeholder="Search movies...">
+
+            <button class="login">Login</button>
+
+            <div class="burger">
+                <img src="./Assets/bars-solid-full.svg" alt="">
+            </div>
+        </div>
+
+        <!-- BURGER MENU -->
+        <div id="menu" class="menu hidden">
+            <p onclick="goPage('help.html')">Help Center</p>
+            <p onclick="goPage('plans.html')">Plans</p>
+            <p onclick="goPage('settings.html')">Settings</p>
+        </div>
+
+    </div>
+
+
+    <!--           login     -->
+
+
+    <!-- ================= LOGIN MODAL ================= -->
+    <div id="loginModal" class="modal hidden">
+
+        <div class="modal-box">
+
+            <!-- CLOSE BUTTON -->
+            <span id="closeModal">&times;</span>
+
+            <h2>Login</h2>
+
+            <input type="text" id="username" placeholder="Enter Username">
+
+            <input type="password" id="password" placeholder="Enter Password">
+
+            <button onclick="loginUser()">Login</button>
+
+        </div>
+
+    </div>
+
+
+    <!--  SEARCH RESULTS OUTSIDE NAVBAR -->
+    <section id="searchSection" class="trending" style="display:none;">
+        <h2>Search Results</h2>
+        <div class="movie-grid" id="searchGrid"></div>
+    </section>
+
+    <!-- HERO + ALL CONTENT = HOME -->
+    <div id="homeSection">
+
+        <!-- HERO -->
+        <div class="hero" id="heroSection">
+            <button class="prev">&#10094;</button>
+
+            <div class="slider" id="slider">
+                <div class="slide"><img src="./Assets/movie_4_vazzha.webp"></div>
+                <div class="slide"><img src="./Assets/movie3_jananayagan.jpg"></div>
+                <div class="slide"><img src="./Assets/movie1_dhoni.webp"></div>
+                <div class="slide"><img src="./Assets/movie_5_amazingspiderman.jpg"></div>
+                <div class="slide"><img src="./Assets/movie2_kala.jpg"></div>
+            </div>
+
+            <button class="next">&#10095;</button>
+        </div>
+
+        <!-- TRENDING -->
+        <section class="trending" id="trendingSection">
+            <h2>Trending</h2>
+            <div class="movie-grid" id="trendingGrid"></div>
+        </section>
+
+        <!-- SERIES -->
+        <section class="trending" id="seriesSection">
+            <h2>Series</h2>
+            <div class="movie-grid" id="seriesGrid"></div>
+        </section>
+
+        <!-- SERIALS -->
+        <section class="trending" id="serialSection">
+            <h2>Serials</h2>
+            <div class="movie-grid" id="serialGrid"></div>
+        </section>
+
+    </div>
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <h2 class="logo">MoviePortal</h2>
+
+            <p class="footer-desc">
+                Watch unlimited movies, series and shows anytime, anywhere.
+            </p>
+
+            <div class="footer-links">
+                <a href="help.html">Help Center</a>
+                <a href="plans.html">Plans</a>
+                <a href="settings.html">Settings</a>
+            </div>
+
+            <div class="socials">
+
+                <a href="https://instagram.com" target="_blank">
+                    <img src="./Assets/instagram.jpg" alt="Instagram">
+                </a>
+
+                <a href="https://github.com/Nandhakumar-001" target="_blank">
+                    <img src="Assets/github.png" alt="GitHub">
+                </a>
+
+            </div>
+        </div>
+
+        <p class="copyright">
+            © 2026 MoviePortal. All rights reserved.
+        </p>
+
+        </div>
+
+    </footer>
+    <script src="./js/script.js"></script>
+
+</body>
+
+</html>

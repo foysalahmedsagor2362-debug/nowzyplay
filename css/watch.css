@@ -1,0 +1,60 @@
+body {
+    background: #111;
+    color: white;
+    text-align: center;
+}
+
+#poster {
+    width: 300px;
+    border-radius: 10px;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    background: red;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.container {
+    text-align: center;   
+}
+
+#player {
+    display: block;       /* important for margin auto to work */
+    margin: 20px auto;    /* centers horizontally */
+    max-width: 80%;      
+}
+
+
+/* ================= MOBILE (MAX 768px) ================= */
+
+@media (max-width: 768px) {
+
+    /* POSTER */
+    #poster {
+        width: 80%;
+        max-width: 250px;
+    }
+
+    /* VIDEO PLAYER */
+    #player {
+        width: 95%;
+        max-width: 100%;
+    }
+
+    /* BUTTONS */
+    button {
+        width: 80%;
+        max-width: 250px;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    /* CONTAINER SPACING */
+    .container {
+        padding: 10px;
+    }
+}

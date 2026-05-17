@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Help Center</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #0f0f1a;
+            color: white;
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            background: #1a1a2e;
+            padding: 25px;
+            border-radius: 10px;
+            width: 350px;
+        }
+
+        h1 {
+            color: #9d4edd;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        button {
+            margin-top: 15px;
+            background: #7b2cbf;
+            color: white;
+            border: none;
+            padding: 8px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #9d4edd;
+        }
+
+        /* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 15px;
+        height: auto;
+    }
+
+    .box {
+        width: 100%;
+        max-width: 350px;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+        
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>Help Center</h1>
+
+    <p><b> Video Issues:</b> Refresh or check internet.</p>
+    <p><b> Login Issues:</b> Enter correct username.</p>
+    <p><b> Devices:</b> Works on all browsers.</p>
+    <p><b> Support:</b> support@movieportal.com</p>
+
+    <button onclick="goBack()">⬅ Back</button>
+</div>
+
+<script>
+function goBack() {
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
