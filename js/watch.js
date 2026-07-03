@@ -1,4 +1,4 @@
-// ✅ ALWAYS FIRST
+//ALWAYS FIRST
 const data = JSON.parse(localStorage.getItem("selectedMovie"));
 
 console.log(data); // test
@@ -28,7 +28,7 @@ document.getElementById("watchBtn").addEventListener("click", () => {
     player.src = data.video;
     player.style.display = "block";
 
-    backBtn.style.display = "inline-block"; // ✅ show back button
+    backBtn.style.display = "inline-block"; // show back button
 
     player.load();
 
