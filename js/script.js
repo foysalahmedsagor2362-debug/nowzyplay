@@ -14,21 +14,21 @@ function navigate(page) {
     }
 
     if (page === "movies") {
-        hero.style.display = "none";   // ❗ HIDE SLIDER
+        hero.style.display = "none";   // HIDE SLIDER
         trending.style.display = "block";
         series.style.display = "none";
         serials.style.display = "none";
     }
 
     if (page === "series") {
-        hero.style.display = "none";   // ❗ HIDE SLIDER
+        hero.style.display = "none";   // 
         trending.style.display = "none";
         series.style.display = "block";
         serials.style.display = "none";
     }
 
     if (page === "serials") {
-        hero.style.display = "none";   // ❗ HIDE SLIDER
+        hero.style.display = "none";   
         trending.style.display = "none";
         series.style.display = "none";
         serials.style.display = "block";
