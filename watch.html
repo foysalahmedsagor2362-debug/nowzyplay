@@ -3,28 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>NowzyPlay | Watch</title>
     <link rel="stylesheet" href="./css/watch.css">
 </head>
 <body>
 
-
-<div class="container">
-    <h1 id="title"></h1>
-
-    <img id="poster">
-
-    <!-- VIDEO PLAYER -->
-    <video id="player" controls style="display:none; width:80%; margin-top:20px;"></video>
-
-    <div class="buttons">
-        <button id="watchBtn">Watch</button>
-        <button id="backBtn" style="display:none; margin-top:10px;"> Back </button>
+    <div class="watch-hero" id="heroBackground">
+        <div class="watch-content">
+            <h1 id="title">Loading...</h1>
+            <p class="description" id="description"></p>
+            
+            <div class="buttons">
+                <button id="watchBtn" class="play-btn">▶ Watch Now</button>
+            </div>
+        </div>
     </div>
-</div>
 
+    <div class="player-container">
+        <video id="player" controls style="display:none;"></video>
+    </div>
 
+    <div class="episodes-section" id="episodesSection" style="display:none;">
+        <div class="ep-header">
+            <h2>Episodes</h2>
+            <select id="seasonSelector"></select>
+        </div>
+        <div id="episodesGrid" class="episode-grid"></div>
+    </div>
 
-<script src="./js/watch.js"></script>
+    <div class="similar-section">
+        <h2>More Like This</h2>
+        <div class="movie-grid" id="similarGrid"></div>
+    </div>
+
+    <script type="module" src="./js/watch.js"></script>
 </body>
 </html>
