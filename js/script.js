@@ -1,345 +1,152 @@
-// navigation
-function navigate(page) {
+// --- CONFIGURATION ---
+const API_KEY = '0b3d17a4fe3dd52593a48d9a0dad4bd6'; // Your API Key
+const BASE_URL = 'https://api.themoviedb.org/3';
+const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
+// ================= NAVIGATION =================
+function navigate(page) {
     const hero = document.getElementById("heroSection");
     const trending = document.getElementById("trendingSection");
     const series = document.getElementById("seriesSection");
     const serials = document.getElementById("serialSection");
 
+    const sections = { hero, trending, series, serials };
+    
+    // Hide all
+    Object.values(sections).forEach(s => s.style.display = "none");
+
     if (page === "home") {
-        hero.style.display = "block";
+        Object.values(sections).forEach(s => s.style.display = "block");
+    } else if (page === "movies") {
         trending.style.display = "block";
+    } else if (page === "series") {
         series.style.display = "block";
-        serials.style.display = "block";
-    }
-
-    if (page === "movies") {
-        hero.style.display = "none";   // HIDE SLIDER
-        trending.style.display = "block";
-        series.style.display = "none";
-        serials.style.display = "none";
-    }
-
-    if (page === "series") {
-        hero.style.display = "none";   // 
-        trending.style.display = "none";
-        series.style.display = "block";
-        serials.style.display = "none";
-    }
-
-    if (page === "serials") {
-        hero.style.display = "none";   
-        trending.style.display = "none";
-        series.style.display = "none";
+    } else if (page === "anime") {
         serials.style.display = "block";
     }
 }
-window.onload = () => {
-    navigate("home");
-};
-// ================= MENU =================
 
+window.onload = () => { navigate("home"); };
+
+// ================= MENU & SLIDER (Your original code kept) =================
 let burger = document.querySelector(".burger");
 let menu = document.getElementById("menu");
+burger.onclick = () => menu.classList.toggle("hidden");
 
-burger.onclick = () => {
-    menu.classList.toggle("hidden");
-};
-//
-function goPage(page) {
-    window.location.href = page;
-}
-// ================= SLIDER =================
+function goPage(page) { window.location.href = page; }
 
 let slider = document.getElementById("slider");
 let slides = document.querySelectorAll(".slide");
-
 let index = 1;
 let gap = 20;
-
-// slide width
 let slideWidth = slides[0].offsetWidth;
-
-// total move distance
 let totalWidth = slideWidth + gap;
 
-// ================= CLONES =================
-
-// clone first and last slide
 let firstClone = slides[0].cloneNode(true);
 let lastClone = slides[slides.length - 1].cloneNode(true);
-
-// add clones
 slider.appendChild(firstClone);
 slider.insertBefore(lastClone, slides[0]);
-
-// update slides
 slides = document.querySelectorAll(".slide");
 
-// ================= MOVE SLIDER =================
-
 function moveSlider(animation = true) {
-
-    // hero width
     let heroWidth = document.querySelector(".hero").offsetWidth;
-
-    // center active slide
     let center = (heroWidth - slideWidth) / 2;
-
-    // animation
-    if (animation) {
-        slider.style.transition = "0.5s";
-    } else {
-        slider.style.transition = "none";
-    }
-
-    // move slider
-    slider.style.transform =
-        `translateX(${center - (index * totalWidth)}px)`;
+    slider.style.transition = animation ? "0.5s" : "none";
+    slider.style.transform = `translateX(${center - (index * totalWidth)}px)`;
 }
-
-// first position
 moveSlider(false);
 
-// ================= NEXT BUTTON =================
-
-document.querySelector(".next").onclick = () => {
-
-    index++;
-
-    moveSlider();
-};
-
-// ================= PREV BUTTON =================
-
-document.querySelector(".prev").onclick = () => {
-
-    index--;
-
-    moveSlider();
-};
-
-// ================= AUTO SLIDE =================
-
-setInterval(() => {
-
-    index++;
-
-    moveSlider();
-
-}, 5000);
-
-// ================= INFINITE LOOP =================
+document.querySelector(".next").onclick = () => { index++; moveSlider(); };
+document.querySelector(".prev").onclick = () => { index--; moveSlider(); };
+setInterval(() => { index++; moveSlider(); }, 5000);
 
 slider.addEventListener("transitionend", () => {
-
-    // fake last slide
-    if (index === slides.length - 1) {
-
-        index = 1;
-
-        moveSlider(false);
-    }
-
-    // fake first slide
-    if (index === 0) {
-
-        index = slides.length - 2;
-
-        moveSlider(false);
-    }
+    if (index === slides.length - 1) { index = 1; moveSlider(false); }
+    if (index === 0) { index = slides.length - 2; moveSlider(false); }
 });
 
-
-const row = document.querySelector(".movie-row");
-
-//------------------ login   -----------------------------------
-
 // ================= LOGIN SYSTEM =================
-
 const modal = document.getElementById("loginModal");
 const closeBtn = document.getElementById("closeModal");
 const loginBtn = document.querySelector(".login");
 
-// OPEN LOGIN MODAL
-function openLogin() {
-    modal.classList.remove("hidden");
-}
+closeBtn.addEventListener("click", () => modal.classList.add("hidden"));
+modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.add("hidden"); });
 
-// CLOSE MODAL
-closeBtn.addEventListener("click", () => {
-    modal.classList.add("hidden");
-});
-
-// CLICK OUTSIDE CLOSE
-modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        modal.classList.add("hidden");
-    }
-});
-
-// LOGIN FUNCTION
 function loginUser() {
     const username = document.getElementById("username").value;
-
-    if (!username) {
-        alert("Enter username");
-        return;
-    }
-
+    if (!username) return alert("Enter username");
     localStorage.setItem("user", username);
-
     modal.classList.add("hidden");
-
     updateLoginUI();
 }
 
-// UPDATE BUTTON UI
 function updateLoginUI() {
     const user = localStorage.getItem("user");
-
-    if (user) {
-        loginBtn.textContent = "Logged in: " + user;
-    } else {
-        loginBtn.textContent = "Login";
-    }
+    loginBtn.textContent = user ? "Logged in: " + user : "Login";
 }
 
-// TOGGLE LOGIN / LOGOUT
 loginBtn.addEventListener("click", () => {
-    const user = localStorage.getItem("user");
-
-    if (user) {
+    if (localStorage.getItem("user")) {
         localStorage.removeItem("user");
         updateLoginUI();
     } else {
-        openLogin();
+        modal.classList.remove("hidden");
     }
 });
-
-// INIT
 window.addEventListener("DOMContentLoaded", updateLoginUI);
 
-// ================= TRENDING DATA =================
+// ================= DYNAMIC API DATA =================
 
-// ================= REUSABLE FUNCTION =================
+async function fetchTMDB(endpoint) {
+    const response = await fetch(`${BASE_URL}${endpoint}?api_key=${API_KEY}`);
+    const data = await response.json();
+    return data.results;
+}
 
 function renderCards(data, containerId) {
-
     const container = document.getElementById(containerId);
-
-    container.innerHTML = ""; //  clear old content
+    if(!container) return;
+    container.innerHTML = ""; 
 
     data.forEach((item) => {
-
         const card = document.createElement("div");
         card.classList.add("movie-card");
+        const imgPath = item.poster_path ? `${IMG_BASE_URL}${item.poster_path}` : 'Assets/placeholder.jpg';
+        
+        card.innerHTML = `<img src="${imgPath}"><div class="movie-title">${item.title || item.name}</div>`;
 
-        const img = document.createElement("img");
-        img.src = item.img;
-
-        const title = document.createElement("div");
-        title.classList.add("movie-title");
-        title.innerText = item.title;
-
-        card.appendChild(img);
-        card.appendChild(title);
-
-        //  IMPORTANT CONNECTION
         card.onclick = () => {
-
-            if (!item.video) {
-                alert("Video not available!");
-                return;
-            }
-
-            localStorage.setItem("selectedMovie", JSON.stringify(item));
-
+            localStorage.setItem("selectedMovie", JSON.stringify({
+                title: item.title || item.name,
+                img: imgPath,
+                overview: item.overview
+            }));
             window.location.href = "watch.html";
         };
-
         container.appendChild(card);
     });
 }
 
-// ================= DATA =================
+async function loadContent() {
+    const trending = await fetchTMDB('/trending/movie/day');
+    renderCards(trending, "trendingGrid");
 
-// Trending (Movies)
-const movies = [
-    { img: "Assets/movie1_dhoni.webp", title: "Ms dhoni", video: "Assets/movie1.mp4" },
-    { img: "Assets/movie_4_vazzha.webp", title: "vaazha", video: "Assets/movie1.mp4" },
-    { img: "Assets/movie_5_amazingspiderman.jpg", title: "Amazingspiderman", video: "Assets/movie1.mp4" },
-    { img: "Assets/movie3_jananayagan.jpg", title: "Jananayagan", video: "Assets/movie1.mp4" },
-    { img: "Assets/movie2_kala.jpg", title: "kaala", video: "Assets/movie1.mp4" },
-    { img: "Assets/trending list/Screenshot 2026-05-16 171652.png", title: "kolaiseval", video: "Assets/movie1.mp4" },
-    { img: "Assets/trending list/Screenshot 2026-05-16 171719.png", title: "aadu", video: "Assets/movie1.mp4" },
-    { img: "Assets/trending list/Screenshot 2026-05-16 171738.png", title: "Neelira", video: "Assets/movie1.mp4" }
-];
+    const series = await fetchTMDB('/discover/tv');
+    renderCards(series, "seriesGrid");
 
-// Series
-const series = [
-    { img: "Assets/series list/Screenshot 2026-05-16 173233.png", title: "ayali", video: "Assets/movie1.mp4" },
-    { img: "Assets/series list/Screenshot 2026-05-16 173247.png", title: "mana shankaravara prasad", video: "Assets/movie1.mp4" },
-    { img: "Assets/series list/Screenshot 2026-05-16 173338.png", title: "Warrant", video: "Assets/movie1.mp4" },
-    { img: "Assets/series list/Screenshot 2026-05-16 173349.png", title: "The Charge sheet", video: "Assets/movie1.mp4" },
-    { img: "Assets/series list/Screenshot 2026-05-16 173403.png", title: "ATM", video: "Assets/movie1.mp4" },
-    { img: "Assets/series list/Screenshot 2026-05-16 173512.png", title: "heartiley Battery", video: "Assets/movie1.mp4" },
-    { img: "Assets/series list/Screenshot 2026-05-16 173531.png", title: "Veduvan", video: "Assets/movie1.mp4" },
-    { img: "Assets/series list/Screenshot 2026-05-16 173555.png", title: "Kakee Circus", video: "Assets/movie1.mp4" },
+    const anime = await fetchTMDB('/discover/tv?with_genres=16');
+    renderCards(anime, "serialGrid"); // Using serialGrid for Anime
+}
 
-];
+loadContent();
 
-// Serials
-const serials = [
-    { img: "Assets/serial/Screenshot 2026-05-16 174004.png", title: "Sirakadikai Assai", video: "Assets/movie1.mp4" },
-    { img: "Assets/serial/Screenshot 2026-05-16 174056.png", title: "ayyanar thunai", video: "Assets/movie1.mp4" },
-    { img: "Assets/serial/Screenshot 2026-05-16 173825.png", title: "Karthikai deepham", video: "Assets/movie1.mp4" },
-    { img: "Assets/serial/Screenshot 2026-05-16 173836.png", title: "paari jatham", video: "Assets/movie1.mp4" },
-    { img: "Assets/serial/Screenshot 2026-05-16 173854.png", title: "Salangai ooli", video: "Assets/movie1.mp4" },
-    { img: "Assets/serial/Screenshot 2026-05-16 173913.png", title: "Vaarisu", video: "Assets/movie1.mp4" },
-];
-
-// ================= RENDER =================
-
-renderCards(movies, "trendingGrid");
-renderCards(series, "seriesGrid");
-renderCards(serials, "serialGrid");
-
-
-// Search logic
-
-// ================= DROPDOWN SEARCH =================
-
-// ================= SEARCH (SEPARATE SECTION) =================
-
+// ================= SEARCH LOGIC =================
 const searchInput = document.getElementById("searchInput");
-const searchGrid = document.getElementById("searchGrid");
-const searchSection = document.getElementById("searchSection");
-
-const allData = [...movies, ...series, ...serials];
-
-searchInput.addEventListener("input", function () {
-
-    const value = searchInput.value.toLowerCase().trim();
-
-    searchGrid.innerHTML = "";
-
-    if (value === "") {
-        searchSection.style.display = "none";
-        return;
-    }
-
-    const results = allData.filter(item =>
-        item.title.toLowerCase().includes(value)
-    );
-
-    if (results.length === 0) {
-        searchGrid.innerHTML = "<p>No results found</p>";
-    } else {
-        renderCards(results, "searchGrid");
-    }
-
-    // ONLY SHOW SEARCH (don’t hide others)
-    searchSection.style.display = "block";
+searchInput.addEventListener("input", async function () {
+    const query = searchInput.value;
+    if (query.length < 3) return;
+    const results = await fetchTMDB(`/search/multi?query=${query}`);
+    renderCards(results, "searchGrid");
+    document.getElementById("searchSection").style.display = "block";
 });
-
