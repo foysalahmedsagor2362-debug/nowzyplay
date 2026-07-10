@@ -353,3 +353,57 @@ body {
     .movie-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
     .movie-card { width: 100%; height: 220px; }
 }
+/* ================= WATCH PAGE STYLES ================= */
+
+/* Hero Section (Cinematic Backdrop) */
+.watch-hero {
+    height: 70vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 0 50px;
+    position: relative;
+}
+
+.watch-hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to right, #000, transparent);
+}
+
+.watch-content { position: relative; z-index: 1; max-width: 600px; }
+.watch-content h1 { font-size: 50px; margin-bottom: 10px; }
+.watch-content .description { line-height: 1.6; color: #ddd; margin-bottom: 20px; }
+
+/* Video Player Area */
+.player-container { text-align: center; padding: 40px 20px; background: #000; }
+#player { width: 80%; aspect-ratio: 16/9; background: #111; border-radius: 10px; }
+
+/* Episodes Section */
+.episodes-section { padding: 40px 50px; background: #000; }
+.ep-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+
+.episode-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.episode-card { cursor: pointer; }
+.episode-card img { width: 100%; border-radius: 8px; transition: transform 0.3s; }
+.episode-card:hover img { transform: scale(1.05); }
+
+/* Dropdown */
+#seasonSelector {
+    background: #222;
+    color: white;
+    padding: 10px 20px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Similar Content Grid */
+.similar-section { padding: 40px 50px; background: #000; }
